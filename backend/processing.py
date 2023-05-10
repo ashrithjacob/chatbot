@@ -9,33 +9,21 @@ from dotenv import load_dotenv
 
 class Summarizer:
     @staticmethod
-    def single_page_summary(page, page_number):
+    def page_summary(page):
         llm = OpenAI(temperature=0)
-        prompt_template = "Write a single line summary of the following: {text} starting with- ON THIS PAGE:"
+        prompt_template = "Write a single line summary of the following: {text}:"
         PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
         chain = load_summarize_chain(llm, chain_type="stuff", prompt=PROMPT)
-        return {"content": chain.run([page]), "number": page_number}
+        return chain.run([page])
 
     @staticmethod
-    def make_pages(pdf_loader):
-        pages = [
-            Document(page_content=pdf_loader.pages[i].extract_text(), page_number=i)
-            for i in range(len(pdf_loader.pages))
-        ]
-        return pages
+    def get_page(pdf_loader, page_number):
+        page = Document(page_content=pdf_loader.pages[page_number].extract_text(), page_number=page_number)
+        return page
 
     @staticmethod
-    def create_summary(pdf_loader):
+    def summary(pdf_loader, page_number):
         load_dotenv()
-        summary = ""
-        pages = Summarizer.make_pages(pdf_loader)
-        for page_number, page in enumerate(pages):
-            page_summary = Summarizer.single_page_summary(page, page_number)
-            summary += (
-                "Page #:"
-                + str(page_summary["number"])
-                + "\n"
-                + page_summary["content"]
-                + "\n"
-            )
-        return summary
+        page = Summarizer.get_page(pdf_loader, page_number)
+        page_summary = Summarizer.page_summary(page)
+        return page_summary

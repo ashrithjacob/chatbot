@@ -1,12 +1,24 @@
 import uvicorn
-from fastapi import FastAPI
+import io
+from fastapi import FastAPI, File, UploadFile
+from processing import Summarizer
+import PyPDF2
+
 
 app = FastAPI()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@app.post("/upload")
+def upload_pdf(file: UploadFile = File(...)):
+    file_buffer = io.BytesIO(file.file.read())
+    pdf_reader = PyPDF2.PdfReader(file_buffer)
+    app.state.PDFREADER = pdf_reader
+    return {"text": pdf_reader.pages[1].extract_text()}
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8080)
+@app.get("/summary")
+def get_summary(page_number: int):
+    pdfreader = app.state.PDFREADER
+    status = page_number < len(pdfreader.pages)
+    if status:
+        page_summary = Summarizer.summary(pdfreader, page_number)
+    return {"summary":page_summary, "status": status}

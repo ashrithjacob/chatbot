@@ -11,7 +11,7 @@ class Summarizer:
     @staticmethod
     def page_summary(page):
         llm = OpenAI(temperature=0)
-        prompt_template = "Write a single line summary of the following: {text}:"
+        prompt_template = "Write a short summary of the following: {text} START SUMMARY WITH -'THIS PAGE':"
         PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
         chain = load_summarize_chain(llm, chain_type="stuff", prompt=PROMPT)
         return chain.run([page])

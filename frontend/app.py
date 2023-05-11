@@ -1,11 +1,7 @@
 import streamlit as st
 import requests
 import io, os, sys
-import PyPDF2
 from PIL import Image
-from pdfminer.high_level import extract_text
-from pdf2image import convert_from_bytes
-
 
 
 st.title('AI POWERED PDF SUMMARY!')
@@ -21,7 +17,7 @@ if uploaded_file is not None:
     else:
         st.write("Error getting object.")
 
-if st.button('Summarize'):
+if st.button('Summarize page by page'):
     status = True
     page_number = 0
     while status:
@@ -29,8 +25,10 @@ if st.button('Summarize'):
         if response.status_code == 200:
             st.write("Page number: ", page_number)
             st.write(response.json()["summary"])
-            status = response.json()["status"]
             page_number += 1
+        elif response.status_code == 404:
+            status = False
+            st.write("End of document")
         else:
             status = False
-            st.write("Error getting summary from page number: ", page_number)
+            st.write(f"Error getting page summary for page number :{ page_number }")

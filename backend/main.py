@@ -30,3 +30,6 @@ def get_rawtext(page_number: int):
     if page_number >= len(pdf_reader.pages):
         raise HTTPException(status_code=404, detail="Page not found")
     return {"rawtext": pdf_reader.pages[page_number]}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

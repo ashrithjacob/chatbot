@@ -2,13 +2,13 @@
 
 FROM python:3.10
 
-WORKDIR /app
+WORKDIR /app/frontend
 
-COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/frontend/requirements.txt
 
-RUN pip install -r requirements.txt
+RUN pip install -r /app/frontend/requirements.txt
 
-COPY . /app
+COPY . /app/frontend/
 
 EXPOSE 8501
 

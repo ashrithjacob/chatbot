@@ -2,13 +2,13 @@
 
 FROM python:3.10
 
-WORKDIR /app
+WORKDIR /app/backend
 
-COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/backend/requirements.txt
 
-RUN pip install -r /app/requirements.txt
+RUN pip install -r /app/backend/requirements.txt
 
-COPY . /app
+COPY . /app/backend
 
 EXPOSE 8000
 

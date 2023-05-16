@@ -7,7 +7,7 @@ from PIL import Image
 st.title('AI POWERED PDF SUMMARY!')
 st.write('Simply upload your pdf file and get a page by page summary!')
 
-uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
+uploaded_file = st.file_uploader('Choose your pdf file', type="pdf")
 if uploaded_file is not None:
     file = {'file': uploaded_file.getvalue()}
     response = requests.post("http://api:8000/upload", files=file)

@@ -18,7 +18,7 @@ jobs:
         id: current-time
         
       - name: Run string replace
-        uses: frabert/replace-string-action@main
+        uses: frabert/replace-string-action@v2
         id: format-time
         with:
           pattern: '[:\.]+'
@@ -27,7 +27,7 @@ jobs:
           flags: 'g'
           
       - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v14
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

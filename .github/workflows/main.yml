@@ -32,8 +32,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: summariser-deployment
-          environment_name: summariser-deployment-env
+          environment_name: Summariser-deployment-env-1
           version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
           region: eu-central-1
           deployment_package: deploy.zip
-    

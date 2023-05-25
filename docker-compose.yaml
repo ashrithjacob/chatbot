@@ -2,15 +2,15 @@ version: "3.7"
 
 services:
   web:
-    build: ./frontend
+    image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/web
     ports:
-      - 8501:8501
-    volumes:
-      - ./frontend:/app/frontend
+      - 80:8501
+    #volumes:
+    #  - ./frontend:/app/frontend
 
   api:
     build: ./backend
     ports:
       - 8000:8000
-    volumes:
-      - ./backend:/app/backend
+    #volumes:
+    #  - ./backend:/app/backend

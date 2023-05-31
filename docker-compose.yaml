@@ -4,7 +4,7 @@ services:
   web:
     image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/web
     ports:
-      - 80:8501
+      - 443:8501
     volumes:
       - ./frontend:/app/frontend
 

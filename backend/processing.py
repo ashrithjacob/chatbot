@@ -10,9 +10,7 @@ from dotenv import load_dotenv
 class Summarizer:
     @staticmethod
     def page_summary(page):
-        print('here')
-        llm = OpenAI(temperature=0)
-        print('after llm')
+        llm = OpenAI(temperature=0.1)
         prompt_template = "Write a short summary of the following: {text} START SUMMARY WITH -'THIS PAGE':"
         PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
         chain = load_summarize_chain(llm, chain_type="stuff", prompt=PROMPT)

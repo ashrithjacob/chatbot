@@ -12,5 +12,7 @@ services:
     image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/api
     ports:
       - 8000:8000
+    env_file:
+      - ./backend/.env
     volumes:
       - ./backend:/app/backend

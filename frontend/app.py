@@ -31,6 +31,6 @@ if st.button('Summarize page by page'):
             st.write("End of document")
         else:
             status = False
-            st.write(response.json()["env"])
+            #st.write(response.json()["env"])
             st.write(f'status code: {response.status_code}')
             st.write(f"Error getting page summary for page number :{ page_number }")

@@ -21,6 +21,7 @@ def get_summary(page_number: int):
     pdfreader = app.state.PDFREADER
     if page_number < len(pdfreader.pages):
         page_summary= Summarizer.summary(pdfreader, page_number)
+        page_summary = "none"
     else:
         page_summary = "none"
         raise HTTPException(status_code=404, detail="Page not found")

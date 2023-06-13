@@ -16,22 +16,16 @@ def upload_pdf(file: UploadFile = File(...)):
     app.state.PDFREADER = pdf_reader
     return {"text": pdf_reader.pages[0].extract_text()}
 
-@app.get("/summary")
-def get_summary(page_number:int):
-    load_dotenv()
-    page_summary = os.environ.get('OPENAI_API_KEY')
-    return {"summary":str(find_dotenv())+"-"+str(page_summary)}
 
-"""
 @app.get("/summary")
 def get_summary(page_number: int):
     pdfreader = app.state.PDFREADER
     if page_number < len(pdfreader.pages):
-        page_summary= Summarizer.summary(pdfreader, page_number)
+        page_summary = Summarizer.summary(pdfreader, page_number)
     else:
         raise HTTPException(status_code=404, detail="Page not found")
-    return {"summary":page_summary}
-"""
+    return {"summary": page_summary}
+
 
 @app.get("/rawtext")
 def get_rawtext(page_number: int):

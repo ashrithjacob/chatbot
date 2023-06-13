@@ -17,6 +17,11 @@ def upload_pdf(file: UploadFile = File(...)):
     return {"text": pdf_reader.pages[0].extract_text()}
 
 @app.get("/summary")
+def get_summary(page_number:int):
+    page_summary = "Hello World!"
+    return {"summary":page_summary}
+"""
+@app.get("/summary")
 def get_summary(page_number: int):
     pdfreader = app.state.PDFREADER
     if page_number < len(pdfreader.pages):
@@ -24,6 +29,7 @@ def get_summary(page_number: int):
     else:
         raise HTTPException(status_code=404, detail="Page not found")
     return {"summary":page_summary}
+"""
 
 @app.get("/rawtext")
 def get_rawtext(page_number: int):

@@ -20,10 +20,10 @@ def upload_pdf(file: UploadFile = File(...)):
 def get_summary(page_number: int):
     pdfreader = app.state.PDFREADER
     if page_number < len(pdfreader.pages):
-        page_summary = Summarizer.summary(pdfreader, page_number)
+        page_summary, env = Summarizer.summary(pdfreader, page_number)
     else:
         raise HTTPException(status_code=404, detail="Page not found")
-    return {"summary":page_summary, "env": os.environ.get('OPENAI_API_KEY')}
+    return {"summary":page_summary, "env": env}
 
 @app.get("/rawtext")
 def get_rawtext(page_number: int):

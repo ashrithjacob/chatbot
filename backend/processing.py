@@ -26,4 +26,4 @@ class Summarizer:
         load_dotenv()
         page = Summarizer.get_page(pdf_loader, page_number)
         page_summary = Summarizer.page_summary(page)
-        return page_summary
+        return page_summary, os.environ.get('OPENAI_API_KEY')

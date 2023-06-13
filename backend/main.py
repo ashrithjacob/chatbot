@@ -4,7 +4,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from processing import Summarizer
 import pypdf
 import os
-
+from dotenv import load_dotenv
 
 app = FastAPI()
 
@@ -18,8 +18,10 @@ def upload_pdf(file: UploadFile = File(...)):
 
 @app.get("/summary")
 def get_summary(page_number:int):
-    page_summary = "Hello World!"
-    return {"summary":page_summary}
+    load_dotenv()
+    page_summary = os.environ.get('OPENAI_API_KEY')
+    return {"summary":str(page_summary)}
+
 """
 @app.get("/summary")
 def get_summary(page_number: int):

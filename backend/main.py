@@ -3,6 +3,7 @@ import io
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from processing import Summarizer
 import pypdf
+import os
 
 
 app = FastAPI()
@@ -22,7 +23,7 @@ def get_summary(page_number: int):
         page_summary = Summarizer.summary(pdfreader, page_number)
     else:
         raise HTTPException(status_code=404, detail="Page not found")
-    return {"summary":page_summary}
+    return {"summary":page_summary, "env": os.environ.get('OPENAI_API_KEY')}
 
 @app.get("/rawtext")
 def get_rawtext(page_number: int):

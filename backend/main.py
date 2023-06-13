@@ -20,7 +20,7 @@ def upload_pdf(file: UploadFile = File(...)):
 def get_summary(page_number:int):
     load_dotenv()
     page_summary = os.environ.get('OPENAI_API_KEY')
-    return {"summary":str(page_summary)}
+    return {"summary":str(os.path.abspath(os.path.dirname(__file__)))+"-"+str(page_summary)}
 
 """
 @app.get("/summary")

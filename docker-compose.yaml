@@ -2,14 +2,14 @@ version: "3.7"
 
 services:
   web:
-    image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/web
+    image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/web:v2
     ports:
       - 80:8501
     volumes:
       - ./frontend:/app/frontend
 
   api:
-    image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/api
+    image: 444133344330.dkr.ecr.eu-central-1.amazonaws.com/api:v2
     ports:
       - 8000:8000
     env_file:
